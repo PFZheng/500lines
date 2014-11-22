@@ -1,5 +1,6 @@
 import socket
 
+# 发送tcp报文
 def communicate(host, port, request):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((host, port))

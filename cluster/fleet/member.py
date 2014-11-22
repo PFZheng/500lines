@@ -16,6 +16,7 @@ class Member(object):  # TODO: rename
         self.components.remove(component)
         self.node.unregister(component)
 
+    # 分发执行
     def event(self, message, **kwargs):
         method = 'on_' + message + '_event'
         for comp in self.components:

@@ -120,8 +120,11 @@ def serve():
     # Create the server
     server = ThreadingTCPServer((args.host, int(args.port)), DispatcherHandler)
     print 'serving on %s:%s' % (args.host, int(args.port))
+
     # Create a thread to check the runner pool
+    # 心跳检查线程执行函数
     def runner_checker(server):
+        # 移除失效runner，转为pending状态
         def manage_commit_lists(runner):
             for commit, assigned_runner in server.dispatched_commits.iteritems():
                 if assigned_runner == runner:

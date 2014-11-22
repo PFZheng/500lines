@@ -7,15 +7,25 @@
     var nextBlock = null; // Block we'll be inserting before
 
     function dragStart(evt){
+        // class类型为block的元素才可以被拖拽
         if (!matches(evt.target, '.block')) return;
+
+        // 拖拽类型
         if (matches(evt.target, '.menu .block')){
             dragType = 'menu';
         }else{
             dragType = 'script';
         }
+
+        // 为正在拖动的block添加dragging标签
         evt.target.classList.add('dragging');
+
+        // 拖拽对象
         dragTarget = evt.target;
+
+        // 未被拖拽的block和脚本
         scriptBlocks = [].slice.call(document.querySelectorAll('.script .block:not(.dragging)'));
+        
         // For dragging to take place in Firefox, we have to set this, even if we don't use it
         evt.dataTransfer.setData('text/html', evt.target.outerHTML);
         if (matches(evt.target, '.menu .block')){
@@ -25,6 +35,7 @@
         }
     }
 
+    // 找到合适的插入位置
     function findPosition(evt){
         var prevBlock = nextBlock;
         nextBlock = null;
@@ -45,6 +56,7 @@
         }
     }
 
+    // 
     function dragEnter(evt){
         if (matches(evt.target, '.menu, .script, .content')){
             evt.target.classList.add('over');
@@ -103,6 +115,7 @@
         _findAndRemoveClass('next');
     }
 
+    // 监听拖拽事件
     document.addEventListener('dragstart', dragStart, false);
     document.addEventListener('dragenter', dragEnter, false);
     document.addEventListener('dragover', dragOver, false);

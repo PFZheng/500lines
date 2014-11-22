@@ -23,6 +23,7 @@ def tuple_to_addr(addr):
 class Node(object):
 
     def __init__(self, port):
+        # UDP socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.bind(('', port))
         self.address = tuple_to_addr(self.sock.getsockname())

@@ -19,7 +19,7 @@ class Listener(member.Component):
 class Ship(object):
 
     def __init__(self, state_machine, port=10001, peers=None, seed=None):
-        peers = peers or ['255.255.255.255-%d' % port]
+        peers = peers or ['255.255.255.255-%d' % port] #给定一个单节点列表，或者按照端口号构造
         self.node = network.Node(port)
         if seed is not None:
             self.cluster_member = member_replicated.ClusterSeed(

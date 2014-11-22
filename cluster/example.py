@@ -21,6 +21,7 @@ def main():
     else:
         seed = None
 
+    # 在本机模拟网络
     ship = Ship(state_machine=key_value_state_machine,
                 port=int(sys.argv[1]), peers=['127.0.0.1-%s' % p for p in sys.argv[2:]],
                 seed=seed)

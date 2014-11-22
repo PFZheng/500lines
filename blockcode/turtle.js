@@ -17,8 +17,8 @@
 		canvas.setAttribute('height', HEIGHT);
 		canvas.style.top = canvasPlaceholder.getBoundingClientRect().top + "px";
 		canvas.style.left = canvasPlaceholder.getBoundingClientRect().left + "px";
-		canvas.style.width = (WIDTH / PIXEL_RATIO) + "px"
-		canvas.style.height = (HEIGHT / PIXEL_RATIO) + "px"
+		canvas.style.width = (WIDTH / PIXEL_RATIO) + "px";
+		canvas.style.height = (HEIGHT / PIXEL_RATIO) + "px";
 		if (evt){ 
 			Menu.runSoon(); 
 		}

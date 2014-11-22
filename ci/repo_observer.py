@@ -29,6 +29,7 @@ def poll():
     args = parser.parse_args()
     dispatcher_host, dispatcher_port = args.dispatcher_server.split(":")
     while True:
+        # 更新repo，获取repo的哈希值，保存到.conmmit_hash
         try:
             # call the bash script that will update the repo and check
             # for changes. If there's a change, it will drop a .commit_hash file
@@ -37,6 +38,7 @@ def poll():
         except subprocess.CalledProcessError as e:
             raise Exception("Could not update and check repository. Reason: %s" % e.output)
 
+        # 检查.commit_hash文件，如存在，说明repo更新了
         if os.path.isfile(".commit_hash"):
             # great, we have a change! let's execute the tests
             # First, check the status of the dispatcher server to see
@@ -52,6 +54,8 @@ def poll():
                 commit = ""
                 with open(".commit_hash", "r") as f:
                     commit = f.readline()
+
+                # 将hash值分发到指定IP的指定端口
                 response = helpers.communicate(dispatcher_host,
                                                int(dispatcher_port),
                                                "dispatch:%s" % commit)
